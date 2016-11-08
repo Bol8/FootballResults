@@ -281,6 +281,10 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AppDomain\AppDomain.csproj">
+      <Project>{635EDEF5-B948-4208-ACDF-3EBB61F3239F}</Project>
+      <Name>AppDomain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{2a8f48fd-0286-4fdc-b7e3-3fa76e465124}</Project>
       <Name>Domain</Name>

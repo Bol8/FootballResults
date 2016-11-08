@@ -1,8 +1,9 @@
 ﻿using Domain.Interfaces;
 using System;
 using System.Collections.Generic;
-using Repository;
+using AppDomain;
 using System.Linq;
+using Repository;
 
 
 namespace Domain.Manage
@@ -54,6 +55,7 @@ namespace Domain.Manage
         /// <returns></returns>
         public List<string> getTeams()
         {
+            
             var teams = db.Partidos.Select(x => x.HomeTeam).Distinct().ToList();
 
             return teams;

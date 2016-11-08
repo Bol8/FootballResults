@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using AppDomain;
+
 namespace Repository
 {
     using System;

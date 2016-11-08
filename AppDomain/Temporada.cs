@@ -7,30 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Repository
+namespace AppDomain
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Liga
+    public partial class Temporada
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Liga()
+        public Temporada()
         {
-            this.Equipos = new HashSet<Equipos>();
-            this.Partidos = new HashSet<Partido>();
+            this.Ligas = new HashSet<Liga>();
         }
     
-        public string IdLiga { get; set; }
+        public int IdTemporada { get; set; }
         public string Nombre { get; set; }
-        public Nullable<int> Temporada { get; set; }
-        public string Pais { get; set; }
-        public string Imagen { get; set; }
+        public string Año { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Equipos> Equipos { get; set; }
-        public virtual Temporada Temporada1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Partido> Partidos { get; set; }
+        public virtual ICollection<Liga> Ligas { get; set; }
     }
 }

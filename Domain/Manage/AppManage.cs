@@ -3,6 +3,7 @@ using Repository;
 using Domain.Manage;
 using System.Collections.Generic;
 using System.Net;
+using AppDomain;
 using Domain.Interfaces;
 using Domain.Models;
 using Domain.Tools;

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using Repository;
 using System.Web.Mvc;
+using AppDomain;
 
 namespace Domain.Models
 {

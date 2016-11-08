@@ -7,14 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Repository
+namespace AppDomain
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Equipos
+    public partial class Partido
     {
-        public string Nombre { get; set; }
+        public int IdPartido { get; set; }
+        public string HomeTeam { get; set; }
+        public string AwayTeam { get; set; }
+        public int FTHG { get; set; }
+        public int FTAG { get; set; }
+        public System.DateTime Date { get; set; }
+        public string FTR { get; set; }
         public string Liga { get; set; }
     
         public virtual Liga Liga1 { get; set; }

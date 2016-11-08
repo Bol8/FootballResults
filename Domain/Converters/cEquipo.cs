@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AppDomain;
 using Domain.Manage;
 using Repository;
 using Domain.Models;
