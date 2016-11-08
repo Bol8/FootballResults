@@ -1,0 +1,48 @@
+﻿@model  Domain.Models.StatisticsTeam
+
+<div>
+    <h4>Partido</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Team)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Team)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MatchesPlayed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MatchesPlayed)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Wins)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Wins)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Loses)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Loses)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Draws)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Draws)
+        </dd>
+
+    </dl>
+</div>
+@*<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdPartido }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@

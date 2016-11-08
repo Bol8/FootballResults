@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FootbalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Equipos">
+          <Key>
+            <PropertyRef Name="Nombre" />
+          </Key>
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Liga" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Ligas">
+          <Key>
+            <PropertyRef Name="IdLiga" />
+          </Key>
+          <Property Name="IdLiga" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Temporada" Type="int" />
+          <Property Name="Pais" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Imagen" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Partidos">
+          <Key>
+            <PropertyRef Name="IdPartido" />
+          </Key>
+          <Property Name="IdPartido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HomeTeam" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AwayTeam" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FTHG" Type="int" Nullable="false" />
+          <Property Name="FTAG" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="FTR" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Liga" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Temporadas">
+          <Key>
+            <PropertyRef Name="IdTemporada" />
+          </Key>
+          <Property Name="IdTemporada" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Año" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Equipos_Ligas">
+          <End Role="Ligas" Type="Self.Ligas" Multiplicity="0..1" />
+          <End Role="Equipos" Type="Self.Equipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ligas">
+              <PropertyRef Name="IdLiga" />
+            </Principal>
+            <Dependent Role="Equipos">
+              <PropertyRef Name="Liga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ligas_Temporadas">
+          <End Role="Temporadas" Type="Self.Temporadas" Multiplicity="0..1" />
+          <End Role="Ligas" Type="Self.Ligas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Temporadas">
+              <PropertyRef Name="IdTemporada" />
+            </Principal>
+            <Dependent Role="Ligas">
+              <PropertyRef Name="Temporada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partidos_Ligas">
+          <End Role="Ligas" Type="Self.Ligas" Multiplicity="0..1" />
+          <End Role="Partidos" Type="Self.Partidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ligas">
+              <PropertyRef Name="IdLiga" />
+            </Principal>
+            <Dependent Role="Partidos">
+              <PropertyRef Name="Liga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FootbalModelStoreContainer">
+          <EntitySet Name="Equipos" EntityType="Self.Equipos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ligas" EntityType="Self.Ligas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Partidos" EntityType="Self.Partidos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Temporadas" EntityType="Self.Temporadas" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Equipos_Ligas" Association="Self.FK_Equipos_Ligas">
+            <End Role="Ligas" EntitySet="Ligas" />
+            <End Role="Equipos" EntitySet="Equipos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ligas_Temporadas" Association="Self.FK_Ligas_Temporadas">
+            <End Role="Temporadas" EntitySet="Temporadas" />
+            <End Role="Ligas" EntitySet="Ligas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partidos_Ligas" Association="Self.FK_Partidos_Ligas">
+            <End Role="Ligas" EntitySet="Ligas" />
+            <End Role="Partidos" EntitySet="Partidos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FootbalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Partido">
+          <Key>
+            <PropertyRef Name="IdPartido" />
+          </Key>
+          <Property Name="IdPartido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HomeTeam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AwayTeam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FTHG" Type="Int32" Nullable="false" />
+          <Property Name="FTAG" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FTR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Liga" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Liga1" Relationship="FootbalModel.FK_Partidos_Ligas" FromRole="Partido" ToRole="Liga" />
+        </EntityType>
+        <EntityContainer Name="FootbalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Partidos" EntityType="Self.Partido" />
+          <EntitySet Name="Equipos" EntityType="FootbalModel.Equipos" />
+          <EntitySet Name="Temporadas" EntityType="FootbalModel.Temporada" />
+          <EntitySet Name="Ligas" EntityType="FootbalModel.Liga" />
+          <AssociationSet Name="FK_Equipos_Ligas" Association="FootbalModel.FK_Equipos_Ligas">
+            <End Role="Liga" EntitySet="Ligas" />
+            <End Role="Equipos" EntitySet="Equipos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ligas_Temporadas" Association="FootbalModel.FK_Ligas_Temporadas">
+            <End Role="Temporada" EntitySet="Temporadas" />
+            <End Role="Liga" EntitySet="Ligas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partidos_Ligas" Association="FootbalModel.FK_Partidos_Ligas">
+            <End Role="Liga" EntitySet="Ligas" />
+            <End Role="Partido" EntitySet="Partidos" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Equipos">
+          <Key>
+            <PropertyRef Name="Nombre" />
+          </Key>
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Liga" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Liga1" Relationship="FootbalModel.FK_Equipos_Ligas" FromRole="Equipos" ToRole="Liga" />
+        </EntityType>
+        <EntityType Name="Temporada">
+          <Key>
+            <PropertyRef Name="IdTemporada" />
+          </Key>
+          <Property Name="IdTemporada" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Año" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Ligas" Relationship="FootbalModel.FK_Ligas_Temporadas" FromRole="Temporada" ToRole="Liga" />
+        </EntityType>
+        <EntityType Name="Liga">
+          <Key>
+            <PropertyRef Name="IdLiga" />
+          </Key>
+          <Property Name="IdLiga" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Temporada" Type="Int32" />
+          <Property Name="Pais" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Imagen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Equipos" Relationship="FootbalModel.FK_Equipos_Ligas" FromRole="Liga" ToRole="Equipos" />
+          <NavigationProperty Name="Temporada1" Relationship="FootbalModel.FK_Ligas_Temporadas" FromRole="Liga" ToRole="Temporada" />
+          <NavigationProperty Name="Partidos" Relationship="FootbalModel.FK_Partidos_Ligas" FromRole="Liga" ToRole="Partido" />
+        </EntityType>
+        <Association Name="FK_Equipos_Ligas">
+          <End Type="FootbalModel.Liga" Role="Liga" Multiplicity="0..1" />
+          <End Type="FootbalModel.Equipos" Role="Equipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Liga">
+              <PropertyRef Name="IdLiga" />
+            </Principal>
+            <Dependent Role="Equipos">
+              <PropertyRef Name="Liga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ligas_Temporadas">
+          <End Type="FootbalModel.Temporada" Role="Temporada" Multiplicity="0..1" />
+          <End Type="FootbalModel.Liga" Role="Liga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Temporada">
+              <PropertyRef Name="IdTemporada" />
+            </Principal>
+            <Dependent Role="Liga">
+              <PropertyRef Name="Temporada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partidos_Ligas">
+          <End Type="FootbalModel.Liga" Role="Liga" Multiplicity="0..1" />
+          <End Type="FootbalModel.Partido" Role="Partido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Liga">
+              <PropertyRef Name="IdLiga" />
+            </Principal>
+            <Dependent Role="Partido">
+              <PropertyRef Name="Liga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FootbalModelStoreContainer" CdmEntityContainer="FootbalEntities">
+          <EntitySetMapping Name="Partidos">
+            <EntityTypeMapping TypeName="FootbalModel.Partido">
+              <MappingFragment StoreEntitySet="Partidos">
+                <ScalarProperty Name="Liga" ColumnName="Liga" />
+                <ScalarProperty Name="IdPartido" ColumnName="IdPartido" />
+                <ScalarProperty Name="HomeTeam" ColumnName="HomeTeam" />
+                <ScalarProperty Name="AwayTeam" ColumnName="AwayTeam" />
+                <ScalarProperty Name="FTHG" ColumnName="FTHG" />
+                <ScalarProperty Name="FTAG" ColumnName="FTAG" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="FTR" ColumnName="FTR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equipos">
+            <EntityTypeMapping TypeName="FootbalModel.Equipos">
+              <MappingFragment StoreEntitySet="Equipos">
+                <ScalarProperty Name="Liga" ColumnName="Liga" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Temporadas">
+            <EntityTypeMapping TypeName="FootbalModel.Temporada">
+              <MappingFragment StoreEntitySet="Temporadas">
+                <ScalarProperty Name="Año" ColumnName="Año" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdTemporada" ColumnName="IdTemporada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ligas">
+            <EntityTypeMapping TypeName="FootbalModel.Liga">
+              <MappingFragment StoreEntitySet="Ligas">
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="Temporada" ColumnName="Temporada" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdLiga" ColumnName="IdLiga" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

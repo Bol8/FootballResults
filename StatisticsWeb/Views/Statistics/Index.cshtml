@@ -1,0 +1,43 @@
+﻿@model Domain.Models.Prognostic
+
+
+
+<div class="row">
+    <div class="col-md-12 MyTitle">
+        <div class="col-md-12">
+            <h1>@Model.League.Nombre</h1>
+        </div>
+    </div>
+    <div class="col-md-12">
+        @using (Ajax.BeginForm("Pronostico", "Statistics", new AjaxOptions { UpdateTargetId = "Resultado", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }))
+        {
+        <div class="form-horizontal CenterContainer">
+            <div class="col-md-4 PronosticList">
+                @Html.DropDownListFor(model => model.HomeTeam, Model.HomeTeamList, "-- Select --", new { @Class = "form-control" })
+                @Html.ValidationMessageFor(model => model.HomeTeam, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-1" style="text-align:center">
+                <h1>VS.</h1>
+            </div>
+            <div class="col-md-4 PronosticList">
+                @Html.DropDownListFor(model => model.AwayTeam, Model.AwayTeamList, "-- Select --", new { @Class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AwayTeam, "", new { @class = "text-danger" })
+            </div>
+            @*<div class="col-md-3 PronosticList">
+                @Html.DropDownListFor(model => model.result, Model.ResultsList, "-- Select --", new { @Class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AwayTeam, "", new { @class = "text-danger" })
+            </div>*@
+            <div class="col-md-2 PronosticList">
+                <input class="btn btn-default" type="submit" value="Go" />
+            </div>
+        </div>
+
+        }
+
+    </div>
+
+</div>
+
+<div class="col-md-12" id="Resultado">
+    @*@Html.Action("Calculate","Statistics")*@
+</div>

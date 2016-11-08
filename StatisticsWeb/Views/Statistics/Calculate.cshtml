@@ -1,0 +1,121 @@
+﻿@model System.Collections.Generic.Dictionary<string, Domain.Models.ProgResultList>
+
+<div class="row">
+    <div class="col-md-12">
+
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="MyColumn">Result</th>
+                    <th class="MyColumn">Total</th>
+                    <th class="MyColumn">8</th>
+                    <th class="MyColumn">6</th>
+                    <th class="MyColumn">3</th>
+                    @*<th>@Html.DisplayNameFor(x => x.Team)</th>
+                        <th>@Html.DisplayNameFor(x => x.MatchesPlayed)</th>
+                        <th>@Html.DisplayNameFor(x => x.Wins)</th>
+                        <th>@Html.DisplayNameFor(x => x.Draws)</th>
+                        <th>@Html.DisplayNameFor(x => x.Loses)</th>
+                        <th>@Html.DisplayNameFor(x => x.PercentWins)</th>
+                        <th>@Html.DisplayNameFor(x => x.PercentDraws)</th>
+                        <th>@Html.DisplayNameFor(x => x.PercentLoses)</th>
+                        <th>@Html.DisplayNameFor(x => x.Points)</th>
+                        <th>Options</th>*@
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var result in Model)
+                {
+                    <tr>
+                        <th>@result.Key</th>
+
+                        @foreach (var prognostic in result.Value.getList())
+                        {
+                            <th class="MyRow">
+                                @*<p>@Html.DisplayNameFor(x => prognostic.MatchsPlayed) : @Html.DisplayFor(x => prognostic.MatchsPlayed)</p>*@
+                                <p class="Info masterTooltip" title="Home percent">@Html.Label("Hp") : @Html.DisplayFor(x => prognostic.HomePercent)%</p>
+                                <p class="Info masterTooltip" title="Away percent">@Html.Label("Ap") : @Html.DisplayFor(x => prognostic.AwayPercent)%</p>
+                                <p class="Info masterTooltip" title="Total percent">@Html.Label("Tp") : @Html.DisplayFor(x => prognostic.TotalPercent)%</p>
+
+                                @{
+                                    if (prognostic.sShare.Equals("0"))
+                                    {
+                                        prognostic.sShare = "N/A";
+                                    }
+                                }
+
+                                <p class="Info masterTooltip">@Html.DisplayNameFor(x => prognostic.sShare) : @Html.DisplayFor(x => prognostic.sShare)</p>
+
+                                @*<p>@Html.DisplayNameFor(x => prognostic.MatchsPlayed) : @Html.DisplayFor(x => prognostic.MatchsPlayed)</p>*@
+                                @*<p>@Html.DisplayNameFor(x => prognostic.HomePercent) : @Html.DisplayFor(x => prognostic.HomePercent)%</p>
+                                    <p>@Html.DisplayNameFor(x => prognostic.AwayPercent) : @Html.DisplayFor(x => prognostic.AwayPercent)%</p>
+                                    <p>@Html.DisplayNameFor(x => prognostic.TotalPercent) : @Html.DisplayFor(x => prognostic.TotalPercent)%</p>
+                                    <p>@Html.DisplayNameFor(x => prognostic.Share) : @Html.DisplayFor(x => prognostic.Share)</p>*@
+                            </th>
+                                    }
+                    </tr>
+                }
+
+
+
+
+
+
+            </tbody>
+
+
+        </table>
+
+
+
+
+        @*@foreach (var result in Model.getList())
+            {
+                <div class="col-md-3">
+                    <p>@Html.DisplayNameFor(x => result.MatchsPlayed) : @Html.DisplayFor(x => result.MatchsPlayed)</p>
+                    <p>@Html.DisplayNameFor(x => result.HomePercent) : @Html.DisplayFor(x => result.HomePercent)%</p>
+                    <p>@Html.DisplayNameFor(x => result.AwayPercent) : @Html.DisplayFor(x => result.AwayPercent)%</p>
+                    <p>@Html.DisplayNameFor(x => result.TotalPercent) : @Html.DisplayFor(x => result.TotalPercent)%</p>
+                    <p>@Html.DisplayNameFor(x => result.Share) : @Html.DisplayFor(x => result.Share)</p>
+                </div>
+            }*@
+
+    </div>
+</div>
+
+
+<script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.masterTooltip').hover(function () {
+                // Hover over code
+               // alert("Hola");
+                var title = $(this).attr('title');
+
+
+                $(this).data('tipText', title).removeAttr('title');
+
+                //$(this).fadeIn('slow');
+
+                //$('.Mytooltip').show();
+
+                $('<p class="Mytooltip"></p>')
+                .text(title)
+                .appendTo('body')
+                .fadeIn('slow');
+
+            }, function () {
+                // Hover out code
+                $(this).attr('title', $(this).data('tipText'));
+                $('.Mytooltip').remove();
+            }).mousemove(function (e) {
+                var mousex = e.pageX + 20; //Get X coordinates
+                var mousey = e.pageY - 40; //Get Y coordinates
+                $('.Mytooltip')
+                .css({ top: mousey, left: mousex })
+            });
+        });
+
+</script>

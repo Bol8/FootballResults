@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Domain.Models.StatisticsTeam>
+
+
+<div class="MyContent">
+    <ul class="nav nav-tabs">
+        <li>@Html.ActionLink("Total", "Index", "Equipo", new { league = ViewBag.League }, new { @class = "btn btn-sm" })</li>
+        <li >@Html.ActionLink("Home", "HomeResults", "Equipo", new { league = ViewBag.League }, new { @class = "btn btn-sm" })</li>
+        <li class="active">@Html.ActionLink("Away", "AwayResult", "Equipo", null, new { @class = "btn btn-sm" })</li>
+        @*<li>@Html.ActionLink("Prognostics", "Index", "Statistics", new { league = ViewBag.League }, null)</li>*@
+    </ul>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(x => x.Team)</th>
+                <th>@Html.DisplayNameFor(x => x.MatchesPlayed)</th>
+                <th>@Html.DisplayNameFor(x => x.Wins)</th>
+                <th>@Html.DisplayNameFor(x => x.Draws)</th>
+                <th>@Html.DisplayNameFor(x => x.Loses)</th>
+                <th>@Html.DisplayNameFor(x => x.PercentWins)</th>
+                <th>@Html.DisplayNameFor(x => x.PercentDraws)</th>
+                <th>@Html.DisplayNameFor(x => x.PercentLoses)</th>
+                <th>@Html.DisplayNameFor(x => x.Points)</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>@Html.DisplayFor(x => item.Team)</th>
+                    <th>@Html.DisplayFor(x => item.MatchesPlayed)</th>
+                    <th>@Html.DisplayFor(x => item.Wins)</th>
+                    <th>@Html.DisplayFor(x => item.Draws)</th>
+                    <th>@Html.DisplayFor(x => item.Loses)</th>
+                    <th>@Html.DisplayFor(x => item.PercentWins) %</th>
+                    <th>@Html.DisplayFor(x => item.PercentDraws) %</th>
+                    <th>@Html.DisplayFor(x => item.PercentLoses) %</th>
+                    <th>@Html.DisplayFor(x => item.Points)</th>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { team = item.Team }) |
+                        @Html.ActionLink("Matchs", "TeamMatchs", new { team = item.Team }) 
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+
+    </table>
+</div>
+
+
+
