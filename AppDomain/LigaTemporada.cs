@@ -12,18 +12,24 @@ namespace AppDomain
     using System;
     using System.Collections.Generic;
     
-    public partial class Equipos
+    public partial class LigaTemporada
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Equipos()
+        public LigaTemporada()
         {
-            this.LigaTemporadas = new HashSet<LigaTemporada>();
+            this.Partidos = new HashSet<Partido>();
+            this.Equipos = new HashSet<Equipos>();
         }
     
-        public string Nombre { get; set; }
-        public string Liga { get; set; }
+        public int Id { get; set; }
+        public string IdLiga { get; set; }
+        public int IdTemporada { get; set; }
     
+        public virtual Liga Liga { get; set; }
+        public virtual Temporada Temporada { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LigaTemporada> LigaTemporadas { get; set; }
+        public virtual ICollection<Partido> Partidos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Equipos> Equipos { get; set; }
     }
 }

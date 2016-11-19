@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Domain.Manage;
 using Domain.Models;
+using AppDomain;
 
 namespace StatisticsWeb.Controllers
 {

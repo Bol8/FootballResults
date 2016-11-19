@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using Repository;
 using System.Web.Mvc;
 using AppDomain;
+using Repository.Context;
 
 namespace Domain.Models
 {

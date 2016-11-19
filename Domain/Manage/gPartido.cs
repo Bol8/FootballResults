@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using AppDomain;
 using System.Linq;
 using Repository;
+using Repository.Context;
 
 
 namespace Domain.Manage

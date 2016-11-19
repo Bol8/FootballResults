@@ -22,7 +22,8 @@ namespace AppDomain
         public System.DateTime Date { get; set; }
         public string FTR { get; set; }
         public string Liga { get; set; }
+        public Nullable<int> LigaTemporada { get; set; }
     
-        public virtual Liga Liga1 { get; set; }
+        public virtual LigaTemporada LigaTemporada1 { get; set; }
     }
 }

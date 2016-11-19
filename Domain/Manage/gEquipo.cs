@@ -7,6 +7,7 @@ using AppDomain;
 using Domain.Interfaces;
 using Repository;
 using Domain.Models;
+using Repository.Context;
 
 namespace Domain.Manage
 {

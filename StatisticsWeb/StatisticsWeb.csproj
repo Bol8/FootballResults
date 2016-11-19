@@ -282,16 +282,16 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AppDomain\AppDomain.csproj">
-      <Project>{635EDEF5-B948-4208-ACDF-3EBB61F3239F}</Project>
+      <Project>{635edef5-b948-4208-acdf-3ebb61f3239f}</Project>
       <Name>AppDomain</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{2a8f48fd-0286-4fdc-b7e3-3fa76e465124}</Project>
       <Name>Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Repository\Repository.csproj">
+    <ProjectReference Include="..\Repository\Infrastrucutre.Persistence.csproj">
       <Project>{96cee5d2-a7e3-449e-9696-be32b001096c}</Project>
-      <Name>Repository</Name>
+      <Name>Infrastrucutre.Persistence</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

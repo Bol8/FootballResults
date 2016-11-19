@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9b112a4eba3c4651b57f0e0ed2aeb236" Name="Diagram1">
+        <EntityTypeShape EntityType="FootbalModel.Equipos" Width="1.5" PointX="4" PointY="1.25" />
+        <EntityTypeShape EntityType="FootbalModel.Liga" Width="1.5" PointX="4" PointY="7.125" />
+        <EntityTypeShape EntityType="FootbalModel.LigaTemporada" Width="1.5" PointX="6.25" PointY="0.875" />
+        <EntityTypeShape EntityType="FootbalModel.Partido" Width="1.5" PointX="8.5" PointY="0.625" />
+        <EntityTypeShape EntityType="FootbalModel.Temporada" Width="1.5" PointX="4" PointY="4.625" />
+        <AssociationConnector Association="FootbalModel.FK_LigaTemporadas_Ligas" />
+        <AssociationConnector Association="FootbalModel.FK_LigaTemporadas_Temporadas" />
+        <AssociationConnector Association="FootbalModel.FK_Partidos_LigaTemporadas" />
+        <AssociationConnector Association="FootbalModel.Equipos_LigaTemporadas" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

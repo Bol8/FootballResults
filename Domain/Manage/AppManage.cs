@@ -20,6 +20,7 @@ namespace Domain.Manage
         
 
 
+
         public AppManage(IConfigManageServices configManage, 
                          IFileManageServices fileManage)
         {
@@ -28,10 +29,13 @@ namespace Domain.Manage
         }
         
 
+
         public void UpdateFiles()
         {
             _fileManage.DownloadFiles(_configManage.getValues("fileNameList"));
         }
+
+
 
         public void UpdateDb()
         {
@@ -45,6 +49,7 @@ namespace Domain.Manage
                 throw;
             }
         }
+
 
         private void updateMatchs()
         {

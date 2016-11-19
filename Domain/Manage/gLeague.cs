@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AppDomain;
 using Repository;
+using Repository.Context;
 
 
 namespace Domain.Manage

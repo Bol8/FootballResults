@@ -17,8 +17,7 @@ namespace AppDomain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Liga()
         {
-            this.Equipos = new HashSet<Equipos>();
-            this.Partidos = new HashSet<Partido>();
+            this.LigaTemporadas = new HashSet<LigaTemporada>();
         }
     
         public string IdLiga { get; set; }
@@ -28,9 +27,6 @@ namespace AppDomain
         public string Imagen { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Equipos> Equipos { get; set; }
-        public virtual Temporada Temporada1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Partido> Partidos { get; set; }
+        public virtual ICollection<LigaTemporada> LigaTemporadas { get; set; }
     }
 }
