@@ -1,8 +1,12 @@
-﻿namespace AppDomain.RepositoryServices.LeagueSeason
+﻿using System.Collections.Generic;
+
+namespace AppDomain.RepositoryServices.LeagueSeason
 {
     public interface ILeagueSeasonRepositoryServices:IRepositoryServices<LigaTemporada>
     {
         LigaTemporada getElementById(int id);
-       // bool exists(string year);
+        void addLeagues(List<AppDomain.Liga> leaguesList,int idSeason);
+
+        // bool exists(string year);
     }
 }

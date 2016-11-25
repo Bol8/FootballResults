@@ -3835,12 +3835,12 @@ function Datepicker() {
 		dayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], // For formatting
 		dayNamesShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], // For formatting
 		dayNamesMin: ["Su","Mo","Tu","We","Th","Fr","Sa"], // Column headings for days starting at Sunday
-		weekHeader: "Wk", // Column header for week of the year
+		weekHeader: "Wk", // Column header for week of the name
 		dateFormat: "mm/dd/yy", // See format options on parseDate
 		firstDay: 0, // The first day of the week, Sun = 0, Mon = 1, ...
 		isRTL: false, // True if right-to-left language, false if left-to-right
-		showMonthAfterYear: false, // True if the year select precedes month, false for month then year
-		yearSuffix: "" // Additional text to append to the year in the month headers
+		showMonthAfterYear: false, // True if the name select precedes month, false for month then name
+		yearSuffix: "" // Additional text to append to the name in the month headers
 	};
 	this._defaults = { // Global defaults for all the date picker instances
 		showOn: "focus", // "focus" for popup on focus,
@@ -3858,18 +3858,18 @@ function Datepicker() {
 		navigationAsDateFormat: false, // True if date formatting applied to prev/today/next links
 		gotoCurrent: false, // True if today link goes back to current selection instead
 		changeMonth: false, // True if month can be selected directly, false if only prev/next
-		changeYear: false, // True if year can be selected directly, false if only prev/next
+		changeYear: false, // True if name can be selected directly, false if only prev/next
 		yearRange: "c-10:c+10", // Range of years to display in drop-down,
-			// either relative to today's year (-nn:+nn), relative to currently displayed year
+			// either relative to today's name (-nn:+nn), relative to currently displayed name
 			// (c-nn:c+nn), absolute (nnnn:nnnn), or a combination of the above (nnnn:-n)
 		showOtherMonths: false, // True to show dates in other months, false to leave blank
 		selectOtherMonths: false, // True to allow selection of dates in other months, false for unselectable
-		showWeek: false, // True to show week of the year, false to not show it
-		calculateWeek: this.iso8601Week, // How to calculate the week of the year,
+		showWeek: false, // True to show week of the name, false to not show it
+		calculateWeek: this.iso8601Week, // How to calculate the week of the name,
 			// takes a Date and returns the number of the week for it
-		shortYearCutoff: "+10", // Short year values < this are in the current century,
+		shortYearCutoff: "+10", // Short name values < this are in the current century,
 			// > this are in the previous century,
-			// string value starting with "+" for current year + value
+			// string value starting with "+" for current name + value
 		minDate: null, // The earliest selectable date, or null for no limit
 		maxDate: null, // The latest selectable date, or null for no limit
 		duration: "fast", // Duration of display/closure
@@ -3879,7 +3879,7 @@ function Datepicker() {
 		beforeShow: null, // Function that takes an input field and
 			// returns a set of custom settings for the date picker
 		onSelect: null, // Define a callback function when a date is selected
-		onChangeMonthYear: null, // Define a callback function when the month or year is changed
+		onChangeMonthYear: null, // Define a callback function when the month or name is changed
 		onClose: null, // Define a callback function when the datepicker is closed
 		numberOfMonths: 1, // Number of months to show at a time
 		showCurrentAtPos: 0, // The position in multipe months at which to show the current month (starting at 0)
@@ -4170,7 +4170,7 @@ $.extend(Datepicker.prototype, {
 		} else if (nodeName === "div" || nodeName === "span") {
 			inline = $target.children("." + this._inlineClass);
 			inline.children().removeClass("ui-state-disabled");
-			inline.find("select.ui-datepicker-month, select.ui-datepicker-year").
+			inline.find("select.ui-datepicker-month, select.ui-datepicker-name").
 				prop("disabled", false);
 		}
 		this._disabledInputs = $.map(this._disabledInputs,
@@ -4198,7 +4198,7 @@ $.extend(Datepicker.prototype, {
 		} else if (nodeName === "div" || nodeName === "span") {
 			inline = $target.children("." + this._inlineClass);
 			inline.children().addClass("ui-state-disabled");
-			inline.find("select.ui-datepicker-month, select.ui-datepicker-year").
+			inline.find("select.ui-datepicker-month, select.ui-datepicker-name").
 				prop("disabled", true);
 		}
 		this._disabledInputs = $.map(this._disabledInputs,
@@ -4368,11 +4368,11 @@ $.extend(Datepicker.prototype, {
 				case 33: $.datepicker._adjustDate(event.target, (event.ctrlKey ?
 							-$.datepicker._get(inst, "stepBigMonths") :
 							-$.datepicker._get(inst, "stepMonths")), "M");
-						break; // previous month/year on page up/+ ctrl
+						break; // previous month/name on page up/+ ctrl
 				case 34: $.datepicker._adjustDate(event.target, (event.ctrlKey ?
 							+$.datepicker._get(inst, "stepBigMonths") :
 							+$.datepicker._get(inst, "stepMonths")), "M");
-						break; // next month/year on page down/+ ctrl
+						break; // next month/name on page down/+ ctrl
 				case 35: if (event.ctrlKey || event.metaKey) {
 							$.datepicker._clearDate(event.target);
 						}
@@ -4393,7 +4393,7 @@ $.extend(Datepicker.prototype, {
 								-$.datepicker._get(inst, "stepBigMonths") :
 								-$.datepicker._get(inst, "stepMonths")), "M");
 						}
-						// next month/year on alt +left on Mac
+						// next month/name on alt +left on Mac
 						break;
 				case 38: if (event.ctrlKey || event.metaKey) {
 							$.datepicker._adjustDate(event.target, -7, "D");
@@ -4410,7 +4410,7 @@ $.extend(Datepicker.prototype, {
 								+$.datepicker._get(inst, "stepBigMonths") :
 								+$.datepicker._get(inst, "stepMonths")), "M");
 						}
-						// next month/year on alt +right
+						// next month/name on alt +right
 						break;
 				case 40: if (event.ctrlKey || event.metaKey) {
 							$.datepicker._adjustDate(event.target, +7, "D");
@@ -4587,7 +4587,7 @@ $.extend(Datepicker.prototype, {
 			setTimeout(function(){
 				//assure that inst.yearshtml didn't change.
 				if( origyearshtml === inst.yearshtml && inst.yearshtml ){
-					inst.dpDiv.find("select.ui-datepicker-year:first").replaceWith(inst.yearshtml);
+					inst.dpDiv.find("select.ui-datepicker-name:first").replaceWith(inst.yearshtml);
 				}
 				origyearshtml = inst.yearshtml = null;
 			}, 0);
@@ -4743,7 +4743,7 @@ $.extend(Datepicker.prototype, {
 		this._adjustDate(target);
 	},
 
-	/* Action for selecting a new month/year. */
+	/* Action for selecting a new month/name. */
 	_selectMonthYear: function(id, select, period) {
 		var target = $(id),
 			inst = this._getInst(target[0]);
@@ -4832,9 +4832,9 @@ $.extend(Datepicker.prototype, {
 		return [(day > 0 && day < 6), ""];
 	},
 
-	/* Set as calculateWeek to determine the week of the year based on the ISO 8601 definition.
+	/* Set as calculateWeek to determine the week of the name based on the ISO 8601 definition.
 	 * @param  date  Date - the date to get the week for
-	 * @return  number - the number of the week within the year that contains this date
+	 * @return  number - the number of the week within the name that contains this date
 	 */
 	iso8601Week: function(date) {
 		var time,
@@ -4855,7 +4855,7 @@ $.extend(Datepicker.prototype, {
 	 * @param  format string - the expected format of the date
 	 * @param  value string - the date in the above format
 	 * @param  settings Object - attributes include:
-	 *					shortYearCutoff  number - the cutoff year for determining the century (optional)
+	 *					shortYearCutoff  number - the cutoff name for determining the century (optional)
 	 *					dayNamesShort	string[7] - abbreviated names of the days from Sunday (optional)
 	 *					dayNames		string[7] - names of the days from Sunday (optional)
 	 *					monthNamesShort string[12] - abbreviated names of the months (optional)
@@ -5047,16 +5047,16 @@ $.extend(Datepicker.prototype, {
 	 * The format can be combinations of the following:
 	 * d  - day of month (no leading zero)
 	 * dd - day of month (two digit)
-	 * o  - day of year (no leading zeros)
-	 * oo - day of year (three digit)
+	 * o  - day of name (no leading zeros)
+	 * oo - day of name (three digit)
 	 * D  - day name short
 	 * DD - day name long
-	 * m  - month of year (no leading zero)
-	 * mm - month of year (two digit)
+	 * m  - month of name (no leading zero)
+	 * mm - month of name (two digit)
 	 * M  - month name short
 	 * MM - month name long
-	 * y  - year (two digit)
-	 * yy - year (four digit)
+	 * y  - name (two digit)
+	 * yy - name (four digit)
 	 * @ - Unix timestamp (ms since 01/01/1970)
 	 * ! - Windows ticks (100ns since 01/01/0001)
 	 * "..." - literal text
@@ -5358,7 +5358,7 @@ $.extend(Datepicker.prototype, {
 					$.datepicker._gotoToday(id);
 				},
 				selectDay: function () {
-					$.datepicker._selectDay(id, +this.getAttribute("data-month"), +this.getAttribute("data-year"), this);
+					$.datepicker._selectDay(id, +this.getAttribute("data-month"), +this.getAttribute("data-name"), this);
 					return false;
 				},
 				selectMonth: function () {
@@ -5530,7 +5530,7 @@ $.extend(Datepicker.prototype, {
 							(printDate.getTime() === currentDate.getTime() ? " " + this._currentClass : "") + // highlight selected day
 							(printDate.getTime() === today.getTime() ? " ui-datepicker-today" : "")) + "'" + // highlight today (if different)
 							((!otherMonth || showOtherMonths) && daySettings[2] ? " title='" + daySettings[2].replace(/'/g, "&#39;") + "'" : "") + // cell title
-							(unselectable ? "" : " data-handler='selectDay' data-event='click' data-month='" + printDate.getMonth() + "' data-year='" + printDate.getFullYear() + "'") + ">" + // actions
+							(unselectable ? "" : " data-handler='selectDay' data-event='click' data-month='" + printDate.getMonth() + "' data-name='" + printDate.getFullYear() + "'") + ">" + // actions
 							(otherMonth && !showOtherMonths ? "&#xa0;" : // display for other months
 							(unselectable ? "<span class='ui-state-default'>" + printDate.getDate() + "</span>" : "<a class='ui-state-default" +
 							(printDate.getTime() === today.getTime() ? " ui-state-highlight" : "") +
@@ -5558,7 +5558,7 @@ $.extend(Datepicker.prototype, {
 		return html;
 	},
 
-	/* Generate the month and year header. */
+	/* Generate the month and name header. */
 	_generateMonthYearHeader: function(inst, drawMonth, drawYear, minDate, maxDate,
 			secondary, monthNames, monthNamesShort) {
 
@@ -5590,11 +5590,11 @@ $.extend(Datepicker.prototype, {
 			html += monthHtml + (secondary || !(changeMonth && changeYear) ? "&#xa0;" : "");
 		}
 
-		// year selection
+		// name selection
 		if ( !inst.yearshtml ) {
 			inst.yearshtml = "";
 			if (secondary || !changeYear) {
-				html += "<span class='ui-datepicker-year'>" + drawYear + "</span>";
+				html += "<span class='ui-datepicker-name'>" + drawYear + "</span>";
 			} else {
 				// determine range of years to display
 				years = this._get(inst, "yearRange").split(":");
@@ -5609,7 +5609,7 @@ $.extend(Datepicker.prototype, {
 				endYear = Math.max(year, determineYear(years[1] || ""));
 				year = (minDate ? Math.max(year, minDate.getFullYear()) : year);
 				endYear = (maxDate ? Math.min(endYear, maxDate.getFullYear()) : endYear);
-				inst.yearshtml += "<select class='ui-datepicker-year' data-handler='selectYear' data-event='change'>";
+				inst.yearshtml += "<select class='ui-datepicker-name' data-handler='selectYear' data-event='change'>";
 				for (; year <= endYear; year++) {
 					inst.yearshtml += "<option value='" + year + "'" +
 						(year === drawYear ? " selected='selected'" : "") +
@@ -5653,7 +5653,7 @@ $.extend(Datepicker.prototype, {
 		return (maxDate && newDate > maxDate ? maxDate : newDate);
 	},
 
-	/* Notify change of month/year. */
+	/* Notify change of month/name. */
 	_notifyChange: function(inst) {
 		var onChange = this._get(inst, "onChangeMonthYear");
 		if (onChange) {

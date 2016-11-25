@@ -55,5 +55,21 @@ namespace Repository.Repository.LeagueSeason
         {
             return _context.FindBy(x => x.Id == id).FirstOrDefault();
         }
+
+        public void addLeagues(List<Liga> leaguesList,int idSeason)
+        {
+            foreach (var league in leaguesList)
+            {
+                var seasonLeague = new LigaTemporada()
+                {
+                    IdLiga = league.IdLiga,
+                    IdTemporada = idSeason,
+                };
+
+                _context.Add(seasonLeague);
+            }
+
+            _context.Save();
+        }
     }
 }

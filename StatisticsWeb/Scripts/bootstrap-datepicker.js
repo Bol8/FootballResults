@@ -167,7 +167,7 @@
 					o.startView = 2;
 					break;
 				case 1:
-				case 'year':
+				case 'name':
 					o.startView = 1;
 					break;
 				default:
@@ -388,7 +388,7 @@
 			);
 
 			if (this.o.immediateUpdates) {
-				// Trigger input updates immediately on changed year/month
+				// Trigger input updates immediately on changed name/month
 				this._events.push([this.element, {
 					'changeYear changeMonth': $.proxy(function(e){
 						this.update(e.date);
@@ -939,7 +939,7 @@
 							ws = new Date(+prevMonth + (this.o.weekStart - prevMonth.getUTCDay() - 7) % 7 * 864e5),
 							// Thursday of this week
 							th = new Date(Number(ws) + (7 + 4 - ws.getUTCDay()) % 7 * 864e5),
-							// First Thursday of year, year from thursday
+							// First Thursday of name, name from thursday
 							yth = new Date(Number(yth = UTCDate(th.getUTCFullYear(), 0, 1)) + (7 + 4 - yth.getUTCDay())%7*864e5),
 							// Calendar week: ms between thursdays, div ms per day, div 7 days
 							calWeek =  (th - yth) / 864e5 / 7 + 1;
@@ -1022,7 +1022,7 @@
 				}),
 				classes;
 			for (var i = -1; i < 11; i++){
-				classes = ['year'];
+				classes = ['name'];
 				tooltip = null;
 
 				if (i === -1)

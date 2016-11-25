@@ -4,12 +4,16 @@
 
 using System;
 using AppDomain;
+using AppDomain.RepositoryServices.League;
+using AppDomain.RepositoryServices.LeagueSeason;
 using AppDomain.RepositoryServices.Season;
 using Domain.Manage;
 using Domain.Tools;
 using Infrastructure.AppManage.Interfaces;
 using Repository.Context;
 using Repository.Repository;
+using Repository.Repository.League;
+using Repository.Repository.LeagueSeason;
 using Repository.Repository.Season;
 
 namespace Infrastructure.AppManage.Manage
@@ -19,6 +23,8 @@ namespace Infrastructure.AppManage.Manage
         private readonly IConfigManageServices _configManage;
         private readonly IFileManageServices _fileManage;
         private readonly ISeasonRepositoryServices _seasonRepository;
+        private readonly ILeagueRepositoryServices _leagueRepository;
+        private readonly ILeagueSeasonRepositoryServices _leagueSeasonRepository;
 
         private readonly gPartido gPartido = new gPartido();
         private readonly gEquipo gEquipo = new gEquipo();
@@ -30,6 +36,8 @@ namespace Infrastructure.AppManage.Manage
             _configManage = configManage;
             _fileManage = fileManage;
             _seasonRepository = new SeasonRepository(new GenericRepository<Temporada>(new FootbalEntities()));
+            _leagueRepository = new LeagueRepository(new GenericRepository<Liga>(new FootbalEntities()));
+            _leagueSeasonRepository = new LeagueSeasonRepository(new GenericRepository<LigaTemporada>(new FootbalEntities()));
         }
         
 
@@ -58,14 +66,18 @@ namespace Infrastructure.AppManage.Manage
         private void updateSeason()
         {
             var seasonName = _configManage.getValue("LocalPath").Split('\\')[5];
-            var year = seasonName.Split()[1];
+            var name = seasonName.Split()[1];
 
-            if (!_seasonRepository.exists(year))
+            if (!_seasonRepository.exists(name))
             {
-                var season = new Temporada() {Nombre = seasonName, Año = year};
+                var year = name.Split('-')[0];
+                var season = new Temporada() {Nombre = name, Año = year };
                 _seasonRepository.add(season);
-            }
 
+                var leagues = _leagueRepository.getElements();
+
+                _leagueSeasonRepository.addLeagues(leagues,season.IdTemporada);
+            }
         }
 
         private void updateMatchs()

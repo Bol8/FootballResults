@@ -9,6 +9,6 @@ namespace AppDomain.RepositoryServices.Season
     public interface ISeasonRepositoryServices:IRepositoryServices<Temporada>
     {
         Temporada getElemntById(int id);
-        bool exists(string year);
+        bool exists(string name);
     }
 }
