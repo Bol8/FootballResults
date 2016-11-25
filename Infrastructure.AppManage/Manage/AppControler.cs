@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Domain.Manage;
-using Repository;
-using Domain.Models;
+using AppDomain.RepositoryServices;
+using AppDomain.RepositoryServices.Match;
+using AppDomain.RepositoryServices.Team;
 using Domain.Converters;
+using Domain.Models;
 
-namespace Domain.Manage
+namespace Infrastructure.AppManage.Manage
 {
     public class AppControler
     {
+        private IMatchRepositoryServices _matchRepository;
+        private ITeamRepositoryServices _teamRepository;
+
+
         private cEquipo cEquipo;
         private cPartido cPartido;
 
@@ -19,14 +21,19 @@ namespace Domain.Manage
 
         public AppControler() { }
 
+        public AppControler(IMatchRepositoryServices matchRepository,ITeamRepositoryServices teamRepository)
+        {
+            _matchRepository = matchRepository;
+            _teamRepository = teamRepository;
+        }
 
         #endregion
 
 
         public bool addTeams()
         {
-            cPartido = new cPartido();
-            var teams = cPartido.getTeams();
+           // cPartido = new cPartido();
+            var teams = _matchRepository.getTeams();
 
             cEquipo = new cEquipo();
             var isOk = cEquipo.addTeams(teams);
@@ -39,7 +46,7 @@ namespace Domain.Manage
 
         public List<StatisticsTeam> TotalResults(string league)
         {
-            cEquipo = new cEquipo();
+          //  cEquipo = new cEquipo();
 
             var teams = cEquipo.getTeams(league);
 

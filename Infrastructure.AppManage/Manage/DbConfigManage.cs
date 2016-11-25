@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Domain.Interfaces;
+﻿
 
-namespace Domain.Manage
+
+using System;
+using System.Collections.Generic;
+using Infrastructure.AppManage.Interfaces;
+
+namespace Infrastructure.AppManage.Manage
 {
     public class DbConfigManage:IConfigManageServices
     {

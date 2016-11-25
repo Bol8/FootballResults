@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{96CEE5D2-A7E3-449E-9696-BE32B001096C}</ProjectGuid>
+    <ProjectGuid>{EB3D244B-EFAD-468D-8E2A-D5C1E6BEB32D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Repository</RootNamespace>
-    <AssemblyName>Repository</AssemblyName>
+    <RootNamespace>Infrastructure.AppManage</RootNamespace>
+    <AssemblyName>Infrastructure.AppManage</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,9 +40,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,54 +50,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context\Model.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Context\Model.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.edmx</DependentUpon>
-    </Compile>
+    <Compile Include="Interfaces\IAppUpdateServices.cs" />
+    <Compile Include="Interfaces\IConfigManageServices.cs" />
+    <Compile Include="Interfaces\IFileManageServices.cs" />
+    <Compile Include="Manage\AppControler.cs" />
+    <Compile Include="Manage\AppManage.cs" />
+    <Compile Include="Manage\DbConfigManage.cs" />
+    <Compile Include="Manage\FileConfigManage.cs" />
+    <Compile Include="Manage\FileManage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\GenericRepository.cs" />
-    <Compile Include="Repository\LeagueSeason\LeagueSeasonRepository.cs" />
-    <Compile Include="Repository\League\LeagueRepository.cs" />
-    <Compile Include="Repository\Match\MatchRepository.cs" />
-    <Compile Include="Repository\Season\SeasonRepository.cs" />
-    <Compile Include="Repository\Team\TeamRepository.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="Context\Model.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
-    <None Include="Context\Model.edmx.diagram">
-      <DependentUpon>Model.edmx</DependentUpon>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Context\Model.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model.edmx</DependentUpon>
-      <LastGenOutput>Model.Context.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AppDomain\CoreDomain.csproj">
       <Project>{635edef5-b948-4208-acdf-3ebb61f3239f}</Project>
       <Name>CoreDomain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{2A8F48FD-0286-4FDC-B7E3-3FA76E465124}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Repository\Infrastrucutre.Persistence.csproj">
+      <Project>{96CEE5D2-A7E3-449E-9696-BE32B001096C}</Project>
+      <Name>Infrastrucutre.Persistence</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

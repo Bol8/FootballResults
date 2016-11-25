@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using Domain.Interfaces;
+using Infrastructure.AppManage.Interfaces;
 
-namespace Domain.Manage
+namespace Infrastructure.AppManage.Manage
 {
     public class FileManage:IFileManageServices
     {

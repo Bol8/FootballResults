@@ -12,6 +12,8 @@ namespace AppDomain.RepositoryServices.Match
         Partido getElementById(int id);
         Partido getElement(string localTeamName, string awayTeamName, DateTime date);
 
+        List<string> getTeams();
+        bool exist(DateTime date,string league,string homeTeam);
 
     }
 }

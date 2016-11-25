@@ -55,5 +55,12 @@ namespace Repository.Repository.Season
         {
             return _context.FindBy(x => x.IdTemporada == id).FirstOrDefault();
         }
+
+        public bool exists(string year)
+        {
+            var season = _context.FindBy(x => Equals(x.Año, year)).FirstOrDefault();
+
+            return season != null;
+        }
     }
 }

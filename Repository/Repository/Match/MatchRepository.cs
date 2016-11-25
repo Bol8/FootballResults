@@ -65,5 +65,21 @@ namespace Repository.Repository.Match
                         x => Equals(x.HomeTeam, localTeamName) && Equals(x.AwayTeam, awayTeamName) && x.Date == date)
                     .FirstOrDefault();
         }
+
+        public List<string> getTeams()
+        {
+            var teams = _context.GetAll().Select(x => x.HomeTeam).Distinct().ToList();
+
+            return teams;
+        }
+
+        public bool exist(DateTime date, string league, string homeTeam)
+        {
+            var team =
+                _context.GetAll()
+                    .FirstOrDefault(x => x.Date == date && x.Liga.Equals(league) && x.HomeTeam.Equals(homeTeam));
+
+            return (team != null);
+        }
     }
 }

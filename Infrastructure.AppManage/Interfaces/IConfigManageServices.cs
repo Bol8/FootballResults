@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace Domain.Interfaces
+
+using System.Collections.Generic;
+
+namespace Infrastructure.AppManage.Interfaces
 {
     public interface IConfigManageServices
     {

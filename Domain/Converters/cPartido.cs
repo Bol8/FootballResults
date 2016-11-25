@@ -50,7 +50,7 @@ namespace Domain.Converters
                 list.Add(match);
 
             }
-            
+
             return list.OrderByDescending(x => DateTime.Parse(x.Date)).ToList();
         }
 

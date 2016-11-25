@@ -66,21 +66,13 @@
   <ItemGroup>
     <Compile Include="Converters\cEquipo.cs" />
     <Compile Include="Converters\cPartido.cs" />
-    <Compile Include="Interfaces\IAppUpdateServices.cs" />
-    <Compile Include="Interfaces\IConfigManageServices.cs" />
     <Compile Include="Interfaces\ICrud.cs" />
     <Compile Include="Interfaces\IEquipoRepositoryServices.cs" />
-    <Compile Include="Interfaces\IFileManageServices.cs" />
     <Compile Include="Interfaces\IGenericRepository.cs" />
     <Compile Include="Interfaces\IRepositoryServices.cs" />
-    <Compile Include="Manage\AppControler.cs" />
-    <Compile Include="Manage\DbConfigManage.cs" />
-    <Compile Include="Manage\FileConfigManage.cs" />
-    <Compile Include="Manage\FileManage.cs" />
     <Compile Include="Manage\gEquipo.cs" />
     <Compile Include="Manage\gLeague.cs" />
     <Compile Include="Manage\gPartido.cs" />
-    <Compile Include="Manage\AppManage.cs" />
     <Compile Include="Manage\StatisticsCalculator.cs" />
     <Compile Include="Models\Match.cs" />
     <Compile Include="Models\Prognostic.cs" />
@@ -101,9 +93,9 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AppDomain\AppDomain.csproj">
+    <ProjectReference Include="..\AppDomain\CoreDomain.csproj">
       <Project>{635edef5-b948-4208-acdf-3ebb61f3239f}</Project>
-      <Name>AppDomain</Name>
+      <Name>CoreDomain</Name>
     </ProjectReference>
     <ProjectReference Include="..\Repository\Infrastrucutre.Persistence.csproj">
       <Project>{96cee5d2-a7e3-449e-9696-be32b001096c}</Project>

@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AppDomain;
-using Repository;
-using Repository.Context;
+using Repository.Context; 
 
 
 namespace Domain.Manage

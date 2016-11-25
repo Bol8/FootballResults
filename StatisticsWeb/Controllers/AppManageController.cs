@@ -5,21 +5,32 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Domain.Manage;
+using Infrastructure.AppManage.Interfaces;
+using Infrastructure.AppManage.Manage;
 
 namespace StatisticsWeb.Controllers
 {
     public class AppManageController : Controller
     {
+        private readonly IConfigManageServices _configFileManage;
+        private readonly string remoteUri;
+        private readonly string localPath;
+      
 
-         private readonly string remoteUri = "http://www.football-data.co.uk/mmz4281/1617/";
-         private readonly string localPath = @"C:\Users\Oscar\Desktop\Resultados\";
+
+        public AppManageController()
+        {
+            _configFileManage = new FileConfigManage();
+            remoteUri = _configFileManage.getValue("RemoteUri");
+            localPath = _configFileManage.getValue("LocalPath");
+        }
 
         // GET: AppManage
         public ActionResult Update()
         {
            // AppManage.UpdateApp();
 
-            var AppManage = new AppManage(new FileConfigManage(),
+            var AppManage = new AppManage(_configFileManage,
                                           new FileManage(new WebClient(), remoteUri, localPath));
 
             AppManage.UpdateFiles();

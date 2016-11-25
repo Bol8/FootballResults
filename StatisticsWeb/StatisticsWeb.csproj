@@ -281,13 +281,17 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AppDomain\AppDomain.csproj">
+    <ProjectReference Include="..\AppDomain\CoreDomain.csproj">
       <Project>{635edef5-b948-4208-acdf-3ebb61f3239f}</Project>
-      <Name>AppDomain</Name>
+      <Name>CoreDomain</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{2a8f48fd-0286-4fdc-b7e3-3fa76e465124}</Project>
       <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.AppManage\Infrastructure.AppManage.csproj">
+      <Project>{EB3D244B-EFAD-468D-8E2A-D5C1E6BEB32D}</Project>
+      <Name>Infrastructure.AppManage</Name>
     </ProjectReference>
     <ProjectReference Include="..\Repository\Infrastrucutre.Persistence.csproj">
       <Project>{96cee5d2-a7e3-449e-9696-be32b001096c}</Project>

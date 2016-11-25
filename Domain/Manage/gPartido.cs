@@ -56,7 +56,6 @@ namespace Domain.Manage
         /// <returns></returns>
         public List<string> getTeams()
         {
-            
             var teams = db.Partidos.Select(x => x.HomeTeam).Distinct().ToList();
 
             return teams;

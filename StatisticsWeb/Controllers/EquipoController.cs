@@ -3,14 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AppDomain.RepositoryServices.Match;
+using AppDomain.RepositoryServices.Team;
 using Domain.Manage;
+using Infrastructure.AppManage.Manage;
 
 namespace StatisticsWeb.Controllers
 {
     public class EquipoController : Controller
     {
-        AppControler appControl = new AppControler();
-        
+        private ITeamRepositoryServices _teamRepository;
+        private IMatchRepositoryServices _matchRepository;
+
+        private AppControler appControl;
+
+        public EquipoController()
+        {
+            
+        }
+
+
         public ActionResult Index(string league)
         {
             ViewBag.League = league;

@@ -1,38 +1,42 @@
-﻿using System;
-using Repository;
-using Domain.Manage;
-using System.Collections.Generic;
-using System.Net;
-using AppDomain;
-using Domain.Interfaces;
-using Domain.Models;
-using Domain.Tools;
+﻿
 
-namespace Domain.Manage
+
+
+using System;
+using AppDomain;
+using AppDomain.RepositoryServices.Season;
+using Domain.Manage;
+using Domain.Tools;
+using Infrastructure.AppManage.Interfaces;
+using Repository.Context;
+using Repository.Repository;
+using Repository.Repository.Season;
+
+namespace Infrastructure.AppManage.Manage
 {
     public class AppManage : IAppUpdateServices
     {
         private readonly IConfigManageServices _configManage;
         private readonly IFileManageServices _fileManage;
+        private readonly ISeasonRepositoryServices _seasonRepository;
 
         private readonly gPartido gPartido = new gPartido();
         private readonly gEquipo gEquipo = new gEquipo();
         
-
-
-
+        
         public AppManage(IConfigManageServices configManage, 
                          IFileManageServices fileManage)
         {
             _configManage = configManage;
             _fileManage = fileManage;
+            _seasonRepository = new SeasonRepository(new GenericRepository<Temporada>(new FootbalEntities()));
         }
         
 
 
         public void UpdateFiles()
         {
-            _fileManage.DownloadFiles(_configManage.getValues("fileNameList"));
+           // _fileManage.DownloadFiles(_configManage.getValues("fileNameList"));
         }
 
 
@@ -41,6 +45,7 @@ namespace Domain.Manage
         {
             try
             {
+                updateSeason();
                 updateMatchs();
                 updateTeams();
             }
@@ -50,6 +55,18 @@ namespace Domain.Manage
             }
         }
 
+        private void updateSeason()
+        {
+            var seasonName = _configManage.getValue("LocalPath").Split('\\')[5];
+            var year = seasonName.Split()[1];
+
+            if (!_seasonRepository.exists(year))
+            {
+                var season = new Temporada() {Nombre = seasonName, Año = year};
+                _seasonRepository.add(season);
+            }
+
+        }
 
         private void updateMatchs()
         {

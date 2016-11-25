@@ -6,18 +6,25 @@ using System.Web.Mvc;
 using Domain.Manage;
 using Domain.Models;
 using AppDomain;
+using AppDomain.RepositoryServices.League;
+using Domain.Repository;
+using Repository.Context;
+using Repository.Repository;
+using Repository.Repository.League;
 
 namespace StatisticsWeb.Controllers
 {
     public class LeagueController : Controller
     {
         private gLeague gLeague;
+        private readonly ILeagueRepositoryServices _leagueRepository;
 
         #region Constructores
 
         public LeagueController()
         {
-            gLeague = new gLeague();
+            _leagueRepository = new LeagueRepository(new Repository.Repository.GenericRepository<Liga>(new FootbalEntities()));
+           // gLeague = new gLeague();
         }
         #endregion
 
@@ -25,7 +32,8 @@ namespace StatisticsWeb.Controllers
         // GET: League
         public ActionResult Index()
         {
-            var leagues = gLeague.list;
+            var leagues = _leagueRepository.getElements();
+           // var leagues = gLeague.list;
 
             return View(leagues);
         }
