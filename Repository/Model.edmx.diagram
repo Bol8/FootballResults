@@ -12,6 +12,10 @@
         <AssociationConnector Association="FootbalModel.FK_Equipos_Ligas" />
         <AssociationConnector Association="FootbalModel.FK_Ligas_Temporadas" />
         <AssociationConnector Association="FootbalModel.FK_Partidos_Ligas" />
+        <EntityTypeShape EntityType="FootbalModel.Bet" Width="1.5" PointX="0.75" PointY="7" />
+        <EntityTypeShape EntityType="FootbalModel.Jornada" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FootbalModel.BetPrognostic" Width="1.5" PointX="3" PointY="7.25" />
+        <AssociationConnector Association="FootbalModel.FK_BetPrognostic_Bet" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

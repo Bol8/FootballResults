@@ -12,17 +12,11 @@ namespace Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class Partido
+    public partial class Jornada
     {
-        public int IdPartido { get; set; }
-        public string HomeTeam { get; set; }
-        public string AwayTeam { get; set; }
-        public int FTHG { get; set; }
-        public int FTAG { get; set; }
-        public System.DateTime Date { get; set; }
-        public string FTR { get; set; }
+        public int IdJornada { get; set; }
+        public System.DateTime Fecha { get; set; }
         public string Liga { get; set; }
-    
-        public virtual Liga Liga1 { get; set; }
+        public int NumeroJornada { get; set; }
     }
 }

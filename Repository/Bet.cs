@@ -12,19 +12,26 @@ namespace Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class Temporada
+    public partial class Bet
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Temporada()
+        public Bet()
         {
-            this.Ligas = new HashSet<Liga>();
+            this.BetPrognostics = new HashSet<BetPrognostic>();
         }
     
-        public int IdTemporada { get; set; }
-        public string Nombre { get; set; }
-        public string Año { get; set; }
+        public long Id { get; set; }
+        public int Week { get; set; }
+        public Nullable<int> Journey { get; set; }
+        public string HomeTeam { get; set; }
+        public string AwayTeam { get; set; }
+        public decimal ShareTo1 { get; set; }
+        public decimal ShareToX { get; set; }
+        public decimal ShareTo2 { get; set; }
+        public string Choice { get; set; }
+        public string Result { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Liga> Ligas { get; set; }
+        public virtual ICollection<BetPrognostic> BetPrognostics { get; set; }
     }
 }

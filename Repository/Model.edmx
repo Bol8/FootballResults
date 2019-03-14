@@ -5,12 +5,49 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="FootbalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Week" Type="int" Nullable="false" />
+          <Property Name="Journey" Type="int" />
+          <Property Name="HomeTeam" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AwayTeam" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShareTo1" Type="decimal" Precision="3" Scale="2" Nullable="false" />
+          <Property Name="ShareToX" Type="decimal" Precision="3" Scale="2" Nullable="false" />
+          <Property Name="ShareTo2" Type="decimal" Precision="3" Scale="2" Nullable="false" />
+          <Property Name="Choice" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Result" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="BetPrognostic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BetId" Type="bigint" Nullable="false" />
+          <Property Name="Matchs" Type="int" Nullable="false" />
+          <Property Name="HomePercent" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="AwayPercent" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="TotalPercent" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="Share" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="Condition" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Equipos">
           <Key>
             <PropertyRef Name="Nombre" />
           </Key>
           <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Liga" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Jornadas">
+          <Key>
+            <PropertyRef Name="IdJornada" />
+          </Key>
+          <Property Name="IdJornada" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Liga" Type="nvarchar" MaxLength="50" />
+          <Property Name="NumeroJornada" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Ligas">
           <Key>
@@ -43,8 +80,22 @@
           <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Año" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK_BetPrognostic_Bet">
+          <End Role="Bet" Type="Self.Bet" Multiplicity="1" />
+          <End Role="BetPrognostic" Type="Self.BetPrognostic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BetPrognostic">
+              <PropertyRef Name="BetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Equipos_Ligas">
-          <End Role="Ligas" Type="Self.Ligas" Multiplicity="0..1" />
+          <End Role="Ligas" Type="Self.Ligas" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Equipos" Type="Self.Equipos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Ligas">
@@ -68,7 +119,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Partidos_Ligas">
-          <End Role="Ligas" Type="Self.Ligas" Multiplicity="0..1" />
+          <End Role="Ligas" Type="Self.Ligas" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Partidos" Type="Self.Partidos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Ligas">
@@ -80,10 +133,17 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="FootbalModelStoreContainer">
+          <EntitySet Name="Bet" EntityType="Self.Bet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BetPrognostic" EntityType="Self.BetPrognostic" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipos" EntityType="Self.Equipos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Jornadas" EntityType="Self.Jornadas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ligas" EntityType="Self.Ligas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Partidos" EntityType="Self.Partidos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Temporadas" EntityType="Self.Temporadas" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BetPrognostic_Bet" Association="Self.FK_BetPrognostic_Bet">
+            <End Role="Bet" EntitySet="Bet" />
+            <End Role="BetPrognostic" EntitySet="BetPrognostic" />
+          </AssociationSet>
           <AssociationSet Name="FK_Equipos_Ligas" Association="Self.FK_Equipos_Ligas">
             <End Role="Ligas" EntitySet="Ligas" />
             <End Role="Equipos" EntitySet="Equipos" />
@@ -131,6 +191,13 @@
           <AssociationSet Name="FK_Partidos_Ligas" Association="FootbalModel.FK_Partidos_Ligas">
             <End Role="Liga" EntitySet="Ligas" />
             <End Role="Partido" EntitySet="Partidos" />
+          </AssociationSet>
+          <EntitySet Name="Bets" EntityType="FootbalModel.Bet" />
+          <EntitySet Name="Jornadas" EntityType="FootbalModel.Jornada" />
+          <EntitySet Name="BetPrognostics" EntityType="FootbalModel.BetPrognostic" />
+          <AssociationSet Name="FK_BetPrognostic_Bet" Association="FootbalModel.FK_BetPrognostic_Bet">
+            <End Role="Bet" EntitySet="Bets" />
+            <End Role="BetPrognostic" EntitySet="BetPrognostics" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Equipos">
@@ -199,6 +266,57 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Bet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Week" Type="Int32" Nullable="false" />
+          <Property Name="Journey" Type="Int32" />
+          <Property Name="HomeTeam" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AwayTeam" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShareTo1" Type="Decimal" Nullable="false" Precision="3" Scale="2" />
+          <Property Name="ShareToX" Type="Decimal" Nullable="false" Precision="3" Scale="2" />
+          <Property Name="ShareTo2" Type="Decimal" Nullable="false" Precision="3" Scale="2" />
+          <Property Name="Choice" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Result" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BetPrognostics" Relationship="FootbalModel.FK_BetPrognostic_Bet" FromRole="Bet" ToRole="BetPrognostic" />
+        </EntityType>
+        <EntityType Name="Jornada">
+          <Key>
+            <PropertyRef Name="IdJornada" />
+          </Key>
+          <Property Name="IdJornada" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Liga" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NumeroJornada" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BetPrognostic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BetId" Type="Int64" Nullable="false" />
+          <Property Name="Matchs" Type="Int32" Nullable="false" />
+          <Property Name="HomePercent" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="AwayPercent" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="TotalPercent" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="Share" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="Condition" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Bet" Relationship="FootbalModel.FK_BetPrognostic_Bet" FromRole="BetPrognostic" ToRole="Bet" />
+        </EntityType>
+        <Association Name="FK_BetPrognostic_Bet">
+          <End Type="FootbalModel.Bet" Role="Bet" Multiplicity="1" />
+          <End Type="FootbalModel.BetPrognostic" Role="BetPrognostic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BetPrognostic">
+              <PropertyRef Name="BetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -244,6 +362,46 @@
                 <ScalarProperty Name="Temporada" ColumnName="Temporada" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="IdLiga" ColumnName="IdLiga" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bets">
+            <EntityTypeMapping TypeName="FootbalModel.Bet">
+              <MappingFragment StoreEntitySet="Bet">
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="Choice" ColumnName="Choice" />
+                <ScalarProperty Name="ShareTo2" ColumnName="ShareTo2" />
+                <ScalarProperty Name="ShareToX" ColumnName="ShareToX" />
+                <ScalarProperty Name="ShareTo1" ColumnName="ShareTo1" />
+                <ScalarProperty Name="AwayTeam" ColumnName="AwayTeam" />
+                <ScalarProperty Name="HomeTeam" ColumnName="HomeTeam" />
+                <ScalarProperty Name="Journey" ColumnName="Journey" />
+                <ScalarProperty Name="Week" ColumnName="Week" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jornadas">
+            <EntityTypeMapping TypeName="FootbalModel.Jornada">
+              <MappingFragment StoreEntitySet="Jornadas">
+                <ScalarProperty Name="NumeroJornada" ColumnName="NumeroJornada" />
+                <ScalarProperty Name="Liga" ColumnName="Liga" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BetPrognostics">
+            <EntityTypeMapping TypeName="FootbalModel.BetPrognostic">
+              <MappingFragment StoreEntitySet="BetPrognostic">
+                <ScalarProperty Name="Condition" ColumnName="Condition" />
+                <ScalarProperty Name="Share" ColumnName="Share" />
+                <ScalarProperty Name="TotalPercent" ColumnName="TotalPercent" />
+                <ScalarProperty Name="AwayPercent" ColumnName="AwayPercent" />
+                <ScalarProperty Name="HomePercent" ColumnName="HomePercent" />
+                <ScalarProperty Name="Matchs" ColumnName="Matchs" />
+                <ScalarProperty Name="BetId" ColumnName="BetId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

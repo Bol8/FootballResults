@@ -39,7 +39,7 @@ namespace Domain.Manage
                 updateMatchs();
                 updateTeams();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

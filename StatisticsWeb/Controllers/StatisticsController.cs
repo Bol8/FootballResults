@@ -36,10 +36,7 @@ namespace StatisticsWeb.Controllers
             var progResults = new ProgResultList();
             var Results = new List<string> { "1", "X", "2" };
             var Dictionary = new Dictionary<string,ProgResultList>();
-
-
-
-
+            
             foreach (var result in Results)
             {
                 prognostic.result = result;
@@ -53,11 +50,8 @@ namespace StatisticsWeb.Controllers
                 Dictionary.Add(result, progResults);
             }
 
-
-            //progResults.Add(appControl.calculateShare(prognostic));
-            //progResults.Add(appControl.calculateShare(prognostic, 8));
-            //progResults.Add(appControl.calculateShare(prognostic, 6));
-            //progResults.Add(appControl.calculateShare(prognostic, 3));
+            ViewBag.HomeTeam = prognostic.HomeTeam;
+            ViewBag.AwayTeam = prognostic.AwayTeam;
 
             return PartialView("Calculate", Dictionary);
         }

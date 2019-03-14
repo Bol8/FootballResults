@@ -9,7 +9,7 @@ using Domain.Models;
 
 namespace Domain.Manage
 {
-    public class gEquipo:IEquipoRepositoryServices
+    public class gEquipo : IEquipoRepositoryServices
     {
         private readonly IGenericRepository<Equipos> _context;
 
@@ -17,7 +17,7 @@ namespace Domain.Manage
         private readonly string Team;
         private readonly List<Equipos> teamList;
 
-       
+
         public gEquipo(IGenericRepository<Equipos> context)
         {
             _context = context;
@@ -36,7 +36,7 @@ namespace Domain.Manage
             this.Team = Team;
             db = new FootbalEntities();
         }
-        
+
 
 
         //public Equipos getElement(long id)
@@ -51,18 +51,20 @@ namespace Domain.Manage
 
         public void add(Equipos element)
         {
-            _context.Add(element);
-            _context.Save();
+            //_context.Add(element);
+            //_context.Save();
+            db.Equipos.Add(element);
+            db.SaveChanges();
         }
 
         public void saveChanges()
         {
-           _context.Save();
+            _context.Save();
         }
 
         public void edit(Equipos elemnt)
         {
-           _context.Edit(elemnt);
+            _context.Edit(elemnt);
         }
 
         public void Delete(Equipos element)
@@ -104,7 +106,7 @@ namespace Domain.Manage
         //    return (team != null);
         //}
 
-            
+
 
         public Equipos getElement(string TeamName)
         {

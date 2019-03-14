@@ -11,8 +11,8 @@ namespace StatisticsWeb.Controllers
     public class AppManageController : Controller
     {
 
-         private readonly string remoteUri = "http://www.football-data.co.uk/mmz4281/1617/";
-         private readonly string localPath = @"C:\Users\Oscar\Desktop\Resultados\";
+         private readonly string remoteUri = "http://www.football-data.co.uk/mmz4281/1819/";
+         private readonly string localPath = @"C:\Users\OBB\PROYECTOS\FootballResults\Resultados\";
 
         // GET: AppManage
         public ActionResult Update()

@@ -12,17 +12,17 @@ namespace Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class Partido
+    public partial class BetPrognostic
     {
-        public int IdPartido { get; set; }
-        public string HomeTeam { get; set; }
-        public string AwayTeam { get; set; }
-        public int FTHG { get; set; }
-        public int FTAG { get; set; }
-        public System.DateTime Date { get; set; }
-        public string FTR { get; set; }
-        public string Liga { get; set; }
+        public long Id { get; set; }
+        public long BetId { get; set; }
+        public int Matchs { get; set; }
+        public decimal HomePercent { get; set; }
+        public decimal AwayPercent { get; set; }
+        public decimal TotalPercent { get; set; }
+        public decimal Share { get; set; }
+        public string Condition { get; set; }
     
-        public virtual Liga Liga1 { get; set; }
+        public virtual Bet Bet { get; set; }
     }
 }
